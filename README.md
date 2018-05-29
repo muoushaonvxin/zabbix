@@ -224,3 +224,18 @@ pm.max_spare_servers = 35
 ```
 
 更改完之后需要重启php, 重启完成之后最好使用 ps -ef | grep php 查看下
+
+### 编译安装nginx
+
+添加普通用户账号来运行nginx
+```shell
+[root@zhangyz ~]# useradd nginx
+[root@web nginx-0.8.55]# tar xvzf nginx-0.8.55.tar.gz 
+[root@web nginx-0.8.55]# cd nginx-0.8.55
+[root@web nginx-0.8.55]#./configure --user=nginx --group=nginx --prefix=/usr/local/nginx  --with-http_stub_status_module --with-http_ssl_module --with-http_gzip_static_module  --with-ipv6
+ [root@web nginx-0.8.55]# make
+ [root@web nginx-0.8.55]# make install
+5，启动：
+ [root@web nginx-0.8.55]# /usr/local/nginx/sbin/nginx -c /usr/local/nginx/conf/nginx.conf
+ 
+```

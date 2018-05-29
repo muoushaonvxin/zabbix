@@ -372,35 +372,50 @@ zabbix-trapper  10051/udp   # Zabbix Trapper
 
 # Zabbix Agent端
 
-1、安装开发软件包
-yum -y groupinstall "Development Tools"
-yum –y install ntpdate
-2、同步客户端时间，防止跟服务器端不一致，导致检测到不可用的监控数据
+1.安装开发软件包
+```shell
+[root@agent01 ~]# yum -y groupinstall "Development Tools"
+[root@agent01 ~]# yum –y install ntpdate
+```
+
+2.同步客户端时间防止跟服务器端不一致导致检测到不可用的监控数据
+```shell
 ntpdate pool.ntp.org
-3、创建zabbix运行所需要的用户跟组
-groupadd  -g 201 zabbix
-useradd -g zabbix -u 201 -m zabbix
-4、解压安装zabbixagent端
-cd /usr/src/
-tar xf zabbix-2.2.2.tar.gz
-cd zabbix-2.2.2
-./configure –sysconfdir=/etc/zabbix --prefix=/usr/local/zabbix  --enable-agent
+```
 
-make && make install
-5、copy agent端运行所需要的脚本
-cp misc/init.d/tru64/zabbix_agentd /etc/init.d/
-chmod +x /etc/init.d/zabbix_agentd
-6、配置agent端配置文件
-vim /etc/zabbix/zabbix_agentd.conf       #此处千万别写成了zabbix_agent.conf,否则配置了不生效
-Server=192.168.239.130                   #填写Server的IP地址
-ServerActive=192.168.239.130             #修改为Server的IP地址
-Hostname=Centos-03                       #填写本机的HostName,注意Server端要能解析
+3.创建zabbix运行所需要的用户跟组
+```shell
+[root@agent01 ~]# groupadd -g 201 zabbix
+[root@agent01 ~]# useradd -g zabbix -u 201 -m zabbix
+```
+
+4.解压安装 zabbix agent端
+```shell
+[root@agent01 ~]# cd /usr/src/
+[root@agent01 src]# tar xf zabbix-3.4.1.tar.gz
+[root@agent01 src]# cd zabbix-3.4.1
+[root@agent01 zabbix-3.4.1]# ./configure –sysconfdir=/etc/zabbix --prefix=/usr/local/zabbix --enable-agent
+[root@agent01 zabbix-3.4.1]# make 
+[root@agent01 zabbix-3.4.1]# make install
+```
+
+5.copy agent端运行所需要的脚本
+```shell
+[root@agent01 zabbix-3.4.1]# cp misc/init.d/tru64/zabbix_agentd /etc/init.d/
+[root@agent01 zabbix-3.4.1]# chmod +x /etc/init.d/zabbix_agentd
+```
+
+6.配置agent端配置文件
+```shell
+[root@agent01 zabbix-3.4.1]# vim /etc/zabbix/zabbix_agentd.conf   # 此处千万别写成了zabbix_agent.conf否则配置了不生效
+Server=192.168.1.1                   #填写Server的IP地址
+ServerActive=192.168.1.1             #修改为Server的IP地址
+Hostname=agent01                     #填写本机的HostName,注意Server端要能解析
 UnsafeUserParameters=1                   #是否允许自定义的key,1为允许，0为不允许
-Include= etc/zabbix/zabbix_agentd.conf.d/#自定义的agentd配置文件(key)可以在这里面写；
-7、启动zabbix agent端
-/etc/init.d/zabbix_agentd start
+Include=etc/zabbix/zabbix_agentd.conf.d/ #自定义的agentd配置文件(key)可以在这里面写；
+```
 
-
-制定PHP的配置文件
-
-/usr/local/php/bin/php --ini
+7.启动zabbix agent端
+```shell
+[root@agent01 zabbix-3.4.1]# /etc/init.d/zabbix_agentd start
+```

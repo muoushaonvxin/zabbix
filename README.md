@@ -303,3 +303,16 @@ server {
     }
 }
 ```
+
+写一个php页面进行测试
+```shell
+[root@zhangyz ~]# vim /var/www/yahoo/test.php
+<?php
+$link=mysql_connect('localhost','root','');
+if($link){
+    echo "<h1>successfull!!</h1>";
+}
+mysql_close();
+?>
+```
+ 

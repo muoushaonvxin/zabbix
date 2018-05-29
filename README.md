@@ -180,3 +180,10 @@ Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 
 mysql> 
 ```
+
+查看mysql数据库的端口
+```shell
+[root@zhangyz ~]# netstat -tunlp | grep mysql 
+tcp        0      0 :::5635                     :::*                        LISTEN      24815/mysqld    
+```
+

@@ -142,3 +142,41 @@ Warning: Bison executable not found in PATH
 [root@zhangyz mysql]# /usr/local/mysql/bin/mysqld_safe --user=mysql &
 ```
 
+打开mysql数据库
+```shell
+[root@zhangyz ~]# /usr/local/mysql/bin/mysql
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 26
+Server version: 5.6.12 Source distribution
+
+Copyright (c) 2000, 2014, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> 
+```
+
+启动成功了, 接下来为mysql数据库设定一个密码
+```shell
+[root@zhangyz ~]# /usr/local/mysql/bin/mysqladmin -u root password redhat
+[root@zhangyz ~]# /usr/local/mysql/bin/mysql -uroot -p'redhat'
+Warning: Using a password on the command line interface can be insecure.
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 28
+Server version: 5.6.16 Source distribution
+
+Copyright (c) 2000, 2014, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> 
+```

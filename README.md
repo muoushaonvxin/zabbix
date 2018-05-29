@@ -360,3 +360,8 @@ zabbix-trapper  10051/tcp   # Zabbix Trapper
 zabbix-trapper  10051/udp   # Zabbix Trapper
 ```
 
+启动服务并开机启动
+```shell
+[root@zhangyz zabbix-3.4.1]# /etc/init.d/zabbix_server start
+[root@zhangyz zabbix-3.4.1]# /etc/init.d/zabbix_agentd start
+```

@@ -235,5 +235,5 @@ pm.max_spare_servers = 35
 [root@zhangyz nginx-1.8.1]# ./configure --user=nginx --group=nginx --prefix=/usr/local/nginx  --with-http_stub_status_module --with-http_ssl_module --with-http_gzip_static_module --with-ipv6
 [root@zhangyz nginx-1.8.1]# make
 [root@zhangyz nginx-1.8.1]# make install
-[root@web nginx-0.8.55]# /usr/local/nginx/sbin/nginx -c /usr/local/nginx/conf/nginx.conf 
+[root@zhangyz nginx-1.8.1]# /usr/local/nginx/sbin/nginx -c /usr/local/nginx/conf/nginx.conf 
 ```

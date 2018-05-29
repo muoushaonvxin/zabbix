@@ -325,7 +325,11 @@ mysql_close();
 [root@zhangyz zabbix-3.4.1]# make install 
 ```
 
+在mysql数据库当中创建一个zabbix用户和名字叫zabbix的数据库
+
 将zabbix的sql数据导入mysql数据库
-mysql -uzabbix -pzabbix -hlocalhost zabbix  database/mysql/schema.sql
-mysql -uzabbix -pzabbix -hlocalhost zabbix  database/mysql/images.sql
-mysql -uzabbix -pzabbix -hlocalhost zabbix  database/mysql/data.sql
+```shell
+mysql -uzabbix -pzabbix -hlocalhost zabbix database/mysql/schema.sql
+mysql -uzabbix -pzabbix -hlocalhost zabbix database/mysql/images.sql
+mysql -uzabbix -pzabbix -hlocalhost zabbix database/mysql/data.sql
+```

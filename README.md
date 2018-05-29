@@ -366,7 +366,9 @@ zabbix-trapper  10051/udp   # Zabbix Trapper
 [root@zhangyz zabbix-3.4.1]# /etc/init.d/zabbix_agentd start
 ```
 
+<br>
 
+<br>
 
 # Zabbix Agent端
 

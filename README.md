@@ -8,7 +8,7 @@
 
 <br>
 
-1.搭建cmake
+### 搭建cmake
 ```shell
 [root@zhangyz ~]# tar zxvf cmake-2.8.12.tar.gz -C /usr/src
 [root@zhangyz ~]# cd /usr/src/cmake.2.8.12
@@ -54,7 +54,7 @@ cmake version 2.8.12.2
 
 ```
 
-2.编译安装mysql
+### 编译安装mysql
 ```shell
 [root@zhangyz ~]# tar -xf mysql-5.6.16.tar.gz -C /usr/src
 [root@zhangyz ~]# cd /usr/src/mysql-5.6.16/
@@ -125,10 +125,12 @@ Warning: Bison executable not found in PATH
 [root@zhangyz mysql]# useradd -M -s /sbin/nologin mysql
 ```
 
-修改权限： 
-    # chown root.mysql   /usr/local/mysql/ -R
-    # chown mysql.mysql   /usr/local/mysql/var/ -R   
- 
+修改权限
+```shell
+[root@zhangyz mysql]# chown root:mysql /usr/local/mysql/ -R
+[root@zhangyz mysql]# chown mysql:mysql /data/db/ -R   
+```
+
 初始化：   
     # ./bin/mysql_install_db  --basedir=/usr/local/mysql/  --datadir=/usr/local/mysql/var/  --user=mysql
     //如果要指定配置文件的位置，使用下面参数 --defaults-file=/usr/local/mysql/etc/my.cnf

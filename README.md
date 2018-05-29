@@ -53,3 +53,62 @@ Linking C executable valgrind
 cmake version 2.8.12.2
 
 ```
+
+2.编译安装mysql
+```shell
+[root@zhangyz ~]# tar -xf mysql-5.6.16.tar.gz -C /usr/src
+[root@zhangyz ~]# cd /usr/src/mysql-5.6.16/
+[root@zhangyz mysql-5.6.16]# /usr/local/cmake/bin/cmake . -LAH 
+[root@zhangyz mysql-5.6.16]# /usr/local/cmake/bin/cmake . -DCMAKE_INSTALL_PREFIX=/usr/local/mysql -DINSTALL_MYSQLDATADIR=/data/db/ -DMYSQL_DATADIR=/data/db/ -DSYSCONFDIR=/usr/local/mysql/etc -DWITH_INNOBASE_STORAGE_ENGINE=1 -DDEFAULT_CHARSET=utf8 -DDEFAULT_COLLATION=utf8_general_ci -DMYSQL_TCP_PORT=5535 -DMYSQL_UNIX_ADDR=/usr/local/mysql/tmp/mysql.sock -DWITH_EXTRA_CHARSETS=all
+-- Running cmake version 2.8.12.2
+CMake Warning (dev) at CMakeLists.txt:187 (INCLUDE):
+  Syntax Warning in cmake code at
+
+    /usr/src/mysql-5.6.16/cmake/ssl.cmake:237:55
+
+  Argument not separated from preceding token by whitespace.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- MySQL 5.6.16
+-- Packaging as: mysql-5.6.16-Linux-x86_64
+-- HAVE_VISIBILITY_HIDDEN
+-- HAVE_VISIBILITY_HIDDEN
+-- HAVE_VISIBILITY_HIDDEN
+-- Could NOT find Curses (missing:  CURSES_LIBRARY CURSES_INCLUDE_PATH) 
+CMake Error at cmake/readline.cmake:85 (MESSAGE):
+  Curses library not found.  Please install appropriate package,
+
+      remove CMakeCache.txt and rerun cmake.On Debian/Ubuntu, package name is libncurses5-dev, on Redhat and derivates it is ncurses-devel.
+Call Stack (most recent call first):
+  cmake/readline.cmake:128 (FIND_CURSES)
+  cmake/readline.cmake:202 (MYSQL_USE_BUNDLED_EDITLINE)
+  CMakeLists.txt:410 (MYSQL_CHECK_EDITLINE)
+
+
+-- Configuring incomplete, errors occurred!
+See also "/usr/src/mysql-5.6.16/CMakeFiles/CMakeOutput.log".
+See also "/usr/src/mysql-5.6.16/CMakeFiles/CMakeError.log".
+```
+
+以上的运行结果报了一个错误, 要先安装一个依赖包Curses然后在移除掉CMakeCache.txt文件在重新运行编译, 解决方法如下
+
+```shell
+[root@zhangyz mysql-5.6.16]# yum -y install ncurses-devel
+[root@zhangyz mysql-5.6.16]# rm -rf CMakeCache.txt 
+[root@zhangyz mysql-5.6.16]# /usr/local/cmake/bin/cmake . -DCMAKE_INSTALL_PREFIX=/usr/local/mysql -DINSTALL_MYSQLDATADIR=/data/db/ -DMYSQL_DATADIR=/data/db/ -DSYSCONFDIR=/usr/local/mysql/etc -DWITH_INNOBASE_STORAGE_ENGINE=1 -DDEFAULT_CHARSET=utf8 -DDEFAULT_COLLATION=utf8_general_ci -DMYSQL_TCP_PORT=5535 -DMYSQL_UNIX_ADDR=/usr/local/mysql/tmp/mysql.sock -DWITH_EXTRA_CHARSETS=all
+-- Looking for asprintf - found
+-- Check size of pthread_t
+-- Check size of pthread_t - done
+-- Performing Test HAVE_PEERCRED
+-- Performing Test HAVE_PEERCRED - Success
+-- Library mysqlclient depends on OSLIBS -lpthread;m;dl
+-- Googlemock was not found. gtest-based unit tests will be disabled. You can run cmake . -DENABLE_DOWNLOADS=1 to automatically download and build required components from source.
+-- If you are inside a firewall, you may need to use an http proxy: export http_proxy=http://example.com:80
+Warning: Bison executable not found in PATH
+-- Library mysqlserver depends on OSLIBS -lpthread;m;crypt;dl
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /usr/src/mysql-5.6.16
+[root@zhangyz mysql-5.6.16]# make
+[root@zhangyz mysql-5.6.16]# make install 
+```

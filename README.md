@@ -240,33 +240,33 @@ pm.max_spare_servers = 35
 
 配置一个nginx的启动脚本
 ```shell
-[root@localhost ~]# vi /etc/init.d/nginx
+[root@zhangyz ~]# vim /etc/init.d/nginx
 #!/bin/bash
 # chkconfig: - 99 20
 # description: Oooo this is my nginx startup script
 PROG="/usr/local/nginx/sbin/nginx"
 PIDF="/usr/local/nginx/logs/nginx.pid"
 case "$1" in
-start)
-$PROG
-;;
-stop)
-kill -s QUIT $(cat $PIDF)
-;;
-restart)
-$0 stop
-$0 start
-;;
-reload)
-kill -s HUP $(cat $PIDF)
-;;
-*)
-echo "Usage: $0 {start|stop|restart|reload}"
-exit 1
+    start)
+        $PROG
+    ;;
+    stop)
+        kill -s QUIT $(cat $PIDF)
+    ;;
+    restart)
+        $0 stop
+        $0 start
+    ;;
+    reload)
+        kill -s HUP $(cat $PIDF)
+    ;;
+    *)
+        echo "Usage: $0 {start|stop|restart|reload}"
+        exit 1
+    ;;
 esac
 exit 0
-[root@localhost ~]# chmod +x /etc/init.d/nginx
-[root@localhost ~]# chkconfig --add nginx
+[root@zhangyz ~]# chmod +x /etc/init.d/nginx
+[root@zhangyz ~]# chkconfig --add nginx
 ```
- 
- 
+

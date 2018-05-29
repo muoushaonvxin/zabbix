@@ -205,3 +205,22 @@ tcp        0      0 :::5635                     :::*                        LIST
 ```shell
 [root@zhangyz php-5.4.17]# cd /usr/local/php5/etc
 ```
+
+编辑php.ini配置文件
+```shell
+[root@zhangyz etc]# vim php.ini
+date.timezone = Asia/Shanghai
+post_max_size = 32M
+max_execution_time = 300
+max_input_time = 300 
+[root@zhangyz etc]# cp php-fpm.conf.default php-fpm.conf
+[root@zhangyz etc]# vim php-fpm.conf
+pid = run/var/php.pid
+user = nginx
+group = nginx
+pm.start_servers = 20
+pm.min_spare_servers = 5
+pm.max_spare_servers = 35
+```
+
+更改完之后需要重启php，启动重启之后最好使用ps -ef | grep php 查看下

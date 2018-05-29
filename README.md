@@ -131,11 +131,14 @@ Warning: Bison executable not found in PATH
 [root@zhangyz mysql]# chown mysql:mysql /data/db/ -R   
 ```
 
-初始化：   
-    # ./bin/mysql_install_db  --basedir=/usr/local/mysql/  --datadir=/usr/local/mysql/var/  --user=mysql
-    //如果要指定配置文件的位置，使用下面参数 --defaults-file=/usr/local/mysql/etc/my.cnf
- 
-启动：
-    # ./bin/mysqld_safe   |--defaults-file=/usr/local/mysql/etc/my.cnf|   --user=mysql &
- 
- 
+初始化mysql数据库
+```shell
+//如果要指定配置文件的位置，使用下面参数 --defaults-file=/usr/local/mysql/etc/my.cnf
+[root@zhangyz mysql]# /usr/local/mysql/bin/mysql_install_db --basedir=/usr/local/mysql/ --datadir=/data/db --user=mysql
+```
+
+启动mysql
+```shell
+[root@zhangyz mysql]# /usr/local/mysql/bin/mysqld_safe --user=mysql &
+```
+

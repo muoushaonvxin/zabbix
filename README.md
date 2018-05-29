@@ -8,7 +8,7 @@
 
 <br>
 
-### 搭建cmake
+### 编译安装cmake
 ```shell
 [root@zhangyz ~]# tar zxvf cmake-2.8.12.tar.gz -C /usr/src
 [root@zhangyz ~]# cd /usr/src/cmake.2.8.12
@@ -187,7 +187,7 @@ mysql>
 tcp        0      0 :::5635                     :::*                        LISTEN      24815/mysqld    
 ```
 
-### 搭建php
+### 编译安装php
 ```shell
 [root@zhangyz ~]# tar -xf php-5.4.17.tar.gz -C /usr/src
 [root@zhangyz ~]# cd /usr/src/php-5.4.17/

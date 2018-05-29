@@ -223,4 +223,4 @@ pm.min_spare_servers = 5
 pm.max_spare_servers = 35
 ```
 
-更改完之后需要重启php，启动重启之后最好使用ps -ef | grep php 查看下
+更改完之后需要重启php，启动重启之后最好使用 ps -ef | grep php 查看下

@@ -2,8 +2,12 @@
 
 <br>
 
+<br>
+
 使用编译安装 Nginx + zabbix + mysql + cmake + php 安装完成监控搭建
- 
+
+<br>
+
 1.搭建cmake
 ```shell
 [root@zhangyz ~]# tar zxvf cmake-2.8.12.tar.gz -C /usr/src

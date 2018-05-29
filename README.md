@@ -324,3 +324,8 @@ mysql_close();
 [root@zhangyz zabbix-3.4.1]# make 
 [root@zhangyz zabbix-3.4.1]# make install 
 ```
+
+将zabbix的sql数据导入mysql数据库
+mysql -uzabbix -pzabbix -hlocalhost zabbix  database/mysql/schema.sql
+mysql -uzabbix -pzabbix -hlocalhost zabbix  database/mysql/images.sql
+mysql -uzabbix -pzabbix -hlocalhost zabbix  database/mysql/data.sql

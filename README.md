@@ -195,3 +195,13 @@ tcp        0      0 :::5635                     :::*                        LIST
 [root@zhangyz php-5.4.17]# make
 [root@zhangyz php-5.4.17]# make install 
 ```
+
+安装完成之后在/usr/src/php-5.4.16目录下
+```shell
+[root@zhangyz php-5.4.17]# cp php.ini-development /usr/local/php5/etc/php.ini
+```
+
+完成之后
+```shell
+[root@zhangyz php-5.4.17]# cd /usr/local/php5/etc
+```

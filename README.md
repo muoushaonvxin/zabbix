@@ -326,10 +326,37 @@ mysql_close();
 ```
 
 在mysql数据库当中创建一个zabbix用户和名字叫zabbix的数据库
+```shell
+mysql> CREATE DATABASE `zabbix` /*!40100 DEFAULT CHARACTER SET utf8 */;
+mysql> use mysql;
+mysql> grant all privileges on zabbix.* to 'zabbix'@'192.168.1.%' identified by 'zabbix';
+mysql> flush privileges;
+```
 
 将zabbix的sql数据导入mysql数据库
 ```shell
-mysql -uzabbix -pzabbix -hlocalhost zabbix database/mysql/schema.sql
-mysql -uzabbix -pzabbix -hlocalhost zabbix database/mysql/images.sql
-mysql -uzabbix -pzabbix -hlocalhost zabbix database/mysql/data.sql
+[root@zhangyz zabbix-3.4.1]# /usr/local/mysql/bin/mysql -uzabbix -pzabbix -hlocalhost zabbix < database/mysql/schema.sql
+[root@zhangyz zabbix-3.4.1]# /usr/local/mysql/bin/mysql -uzabbix -pzabbix -hlocalhost zabbix < database/mysql/images.sql
+[root@zhangyz zabbix-3.4.1]# /usr/local/mysql/bin/mysql -uzabbix -pzabbix -hlocalhost zabbix < database/mysql/data.sql
 ```
+
+修改配置文件
+```shell
+[root@zhangyz zabbix-3.4.1]# cp misc/init.d/fedora/core/zabbix_server /etc/init.d/
+[root@zhangyz zabbix-3.4.1]# cp misc/init.d/fedora/core/zabbix_agentd /etc/init.d/
+[root@zhangyz zabbix-3.4.1]# cp -R frontends/php /var/www/html/zabbix
+[root@zhangyz zabbix-3.4.1]# sed -i 's/^DBUser=.*$/DBUser=zabbix/g' /usr/local/zabbix/etc/zabbix_server.conf
+[root@zhangyz zabbix-3.4.1]# sed -i 's/^.*DBPassword=.*$/DBPassword=zabbix/g' /usr/local/zabbix/etc/zabbix_server.conf
+[root@zhangyz zabbix-3.4.1]# sed -i 's/BASEDIR=\/usr\/local/BASEDIR=\/usr\/local\/zabbix/g' /etc/init.d/zabbix_server
+[root@zhangyz zabbix-3.4.1]# sed -i 's/BASEDIR=\/usr\/local/BASEDIR=\/usr\/local\/zabbix/g' /etc/init.d/zabbix_agentd
+```
+
+添加zabbix服务端口到 /etc/services 文件当中
+```shell
+[root@zhangyz zabbix-3.4.1]# vim /etc/services eof
+zabbix-agent    10050/tcp   # Zabbix Agent
+zabbix-agent    10050/udp   # Zabbix Agent
+zabbix-trapper  10051/tcp   # Zabbix Trapper
+zabbix-trapper  10051/udp   # Zabbix Trapper
+```
+

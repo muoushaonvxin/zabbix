@@ -112,3 +112,28 @@ Warning: Bison executable not found in PATH
 [root@zhangyz mysql-5.6.16]# make
 [root@zhangyz mysql-5.6.16]# make install 
 ```
+
+安装完成之后进入mysql源码安装目录
+```shell
+[root@zhangyz mysql-5.6.16]# cd /usr/local/mysql
+[root@zhangyz mysql]# mkdir tmp etc var log
+[root@zhangyz mysql]# cp scripts/mysql_install_db ./bin 
+```
+
+创建一个mysql用户, 如果已经存在就不需要创建
+```shell
+[root@zhangyz mysql]# useradd -M -s /sbin/nologin mysql
+```
+
+修改权限： 
+    # chown root.mysql   /usr/local/mysql/ -R
+    # chown mysql.mysql   /usr/local/mysql/var/ -R   
+ 
+初始化：   
+    # ./bin/mysql_install_db  --basedir=/usr/local/mysql/  --datadir=/usr/local/mysql/var/  --user=mysql
+    //如果要指定配置文件的位置，使用下面参数 --defaults-file=/usr/local/mysql/etc/my.cnf
+ 
+启动：
+    # ./bin/mysqld_safe   |--defaults-file=/usr/local/mysql/etc/my.cnf|   --user=mysql &
+ 
+ 

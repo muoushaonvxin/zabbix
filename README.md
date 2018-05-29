@@ -273,7 +273,7 @@ exit 0
  
 配置nginx支持php的解析
 ```shell
-[root@localhost etc]# vim /usr/local/nginx/conf/nginx.conf
+[root@zhangyz ~]# vim /usr/local/nginx/conf/nginx.conf
 server {
     listen       80;
     server_name www.abc.com;          

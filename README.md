@@ -270,3 +270,36 @@ exit 0
 [root@zhangyz ~]# chkconfig --add nginx
 ```
 
+ 
+配置nginx支持php的解析
+```shell
+[root@localhost etc]# vim /usr/local/nginx/conf/nginx.conf
+server {
+    listen       80;
+    server_name www.abc.com;          
+    charset utf-8;      
+    access_log logs/host.access.log main;          
+    
+    location / {
+        root   /var/www/yahoo;
+        index index.html index.php;
+    }
+    
+    location ~ \.php$ {
+        root    /var/www/yahoo;
+        fastcgi_pass    127.0.0.1:9000; 
+        fastcgi_index   index.php;
+        include         fastcgi.conf;
+    }
+    
+    location ~ /status {
+        stub_status     on;
+        access_log      off;
+    }
+    
+    error_page   500 502 503 504 /50x.html;
+    location = /50x.html {
+        root   html;
+    }
+}
+```

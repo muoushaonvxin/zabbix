@@ -1,5 +1,7 @@
 # 安装zabbix3.0
 
+<br>
+
 使用编译安装 Nginx + zabbix + mysql + cmake + php 安装完成监控搭建
  
 1.搭建cmake

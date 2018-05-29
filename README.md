@@ -315,4 +315,12 @@ if($link){
 mysql_close();
 ?>
 ```
- 
+
+### 编译安装zabbix
+```shell
+[root@zhangyz ~]# tar -xf zabbix-3.4.1.tar.gz -C /usr/src
+[root@zhangyz ~]# cd /usr/src/zabbix-3.4.1
+[root@zhangyz zabbix-3.4.1]# ./configure --prefix=/usr/local/zabbix --enable-server --enable-proxy --enable-agent --with-mysql=/usr/local/mysql/bin/mysql_config --with-net-snmp --with-libcurl
+[root@zhangyz zabbix-3.4.1]# make 
+[root@zhangyz zabbix-3.4.1]# make instal
+```

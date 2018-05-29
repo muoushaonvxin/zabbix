@@ -408,11 +408,11 @@ ntpdate pool.ntp.org
 6.配置agent端配置文件
 ```shell
 [root@agent01 zabbix-3.4.1]# vim /etc/zabbix/zabbix_agentd.conf   # 此处千万别写成了zabbix_agent.conf否则配置了不生效
-Server=192.168.1.1                   #填写Server的IP地址
-ServerActive=192.168.1.1             #修改为Server的IP地址
-Hostname=agent01                     #填写本机的HostName,注意Server端要能解析
-UnsafeUserParameters=1                   #是否允许自定义的key,1为允许，0为不允许
-Include=etc/zabbix/zabbix_agentd.conf.d/ #自定义的agentd配置文件(key)可以在这里面写；
+Server=192.168.1.1                   # 填写Server的IP地址
+ServerActive=192.168.1.1             # 修改为Server的IP地址
+Hostname=agent01                     # 填写本机的HostName,注意Server端要能解析
+UnsafeUserParameters=1                   # 是否允许自定义的key,1为允许，0为不允许
+Include=etc/zabbix/zabbix_agentd.conf.d/ # 自定义的agentd配置文件(key)可以在这里面写；
 ```
 
 7.启动zabbix agent端

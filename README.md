@@ -373,37 +373,37 @@ zabbix-trapper  10051/udp   # Zabbix Trapper
 
 function start() {
     /etc/init.d/mysqld start
-	  /usr/local/nginx/sbin/nginx -c /usr/local/nginx/conf/nginx.conf
-	  /usr/local/php5/sbin/php-fpm -c /usr/local/php5/etc/php.ini-conf
-	  /etc/init.d/zabbix_server start
-	  sync;sync;sync;sync;sync
-	  sleep 2
+    /usr/local/nginx/sbin/nginx -c /usr/local/nginx/conf/nginx.conf
+    /usr/local/php5/sbin/php-fpm -c /usr/local/php5/etc/php.ini-conf
+    /etc/init.d/zabbix_server start
+    sync;sync;sync;sync;sync
+    sleep 2
 }
 
 function listen(){	
-	  netstat -tunlp | grep -E "(3306|80|9000|10051)"
+    netstat -tunlp | grep -E "(3306|80|9000|10051)"
 }
 
 function stop() {
-	  /etc/init.d/mysqld stop
-	  kill `cat /usr/local/php5/var/run/php-fpm.pid`
-	  kill `netstat -tunlp | grep nginx | awk '{print $NF}' | cut -d "/" -f1`
-	  /etc/init.d/zabbix_server stop
-	  sync;sync;sync;sync;sync
+    /etc/init.d/mysqld stop
+    kill `cat /usr/local/php5/var/run/php-fpm.pid`
+    kill `netstat -tunlp | grep nginx | awk '{print $NF}' | cut -d "/" -f1`
+    /etc/init.d/zabbix_server stop
+    sync;sync;sync;sync;sync
 }
 
 case "$1" in
     start)
-	      start
-	  ;;
+        start
+    ;;
     stop)
-	      stop
-	  ;;
+        stop
+    ;;
     listen)
-	      listen
-	  ;;
+        listen
+    ;;
     *)
-	      echo "Usage: `basename $0` stop | start"
+        echo "Usage: `basename $0` stop | start"
     ;;
 esac
 ```
